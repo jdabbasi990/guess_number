@@ -5,27 +5,26 @@ class Numberlogic {
   int _random = Random().nextInt(100);
 
   void play() {
+    print('Please guess the number between 0  -  100');
     while (true) {
-      print('Please guess the number between 0  -  100');
-      int answer = int.parse(stdin.readLineSync()!);
+      int? answer;
 
+      while (answer == null) {
+        try {
+          answer = int.parse(stdin.readLineSync()!);
+        } on FormatException {
+          print('Please enter a valid number between 0 - 100');
+        }
+      }
       if (answer == _random) {
         print('You guessed it!');
-        clearConsole();
       } else if (answer > _random) {
         print('Too High');
-        clearConsole();
       } else if (answer < _random) {
         print('Too low');
-        clearConsole();
       } else {
         print('Wrong input');
-        clearConsole();
       }
     }
-  }
-
-  void clearConsole() {
-    Process.runSync("cls", [], runInShell: true);
   }
 }
